@@ -19,9 +19,9 @@ CONSTRAINT courseLocationNameConstraint UNIQUE (`location_name`)
 # Holes Table ( Mto1 w/ Course)
 CREATE TABLE `holes`(
 `id` int(11) AUTO_INCREMENT NOT NULL,
-`course_id` int(11),
+`course_id` int(11) NOT NULL,
 `hole_number` int(11) NOT NULL, 
-`handicap` float(3,2),
+`handicap` float(5,2),
 `par` int(11),
 `blue_length` int(11),
 `gold_length` int(11),
@@ -35,10 +35,10 @@ PRIMARY KEY(`id`)
 CREATE TABLE `courses`(
 `id` int(11) AUTO_INCREMENT NOT NULL,
 `course_name` varchar(255) NOT NULL,
-`rating` float(3,2),
+`rating` float(5,2),
 `par` int(11),
 `yards` int(11),
-`slope` float(3,2),
+`slope` float(5,2),
 `location_id` int(11),
 `image_ref` varchar(255),
 `hole_1` int(11),
@@ -93,7 +93,7 @@ CREATE TABLE `players`(
 `state` varchar(2),
 `sex` char(1),
 `home_course` int(11),
-`handicap` float(3,2),
+`handicap` float(5,2),
 `is_pro` boolean,
 FOREIGN KEY (`home_course`) REFERENCES `course_locations`(`id`) ON UPDATE CASCADE ON DELETE SET NULL,
 PRIMARY KEY(`id`),
@@ -137,10 +137,9 @@ CREATE TABLE `player_rounds`(
 `player_id` int(11),
 `round_id` int(11),
 `players` int(11),
-FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON UPDATE CASCADE,
-FOREIGN KEY (`round_id`) REFERENCES `rounds`(`id`) ON UPDATE CASCADE,
-PRIMARY KEY (`player_id`,`round_id`),
-CONSTRAINT player_rounds_primarykey_constraint UNIQUE(`player_id`,`round_id`)
+FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (`round_id`) REFERENCES `rounds`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+PRIMARY KEY (`player_id`,`round_id`)
 )ENGINE=InnoDB CHARACTER SET=latin1;
 
 

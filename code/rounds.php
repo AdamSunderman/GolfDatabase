@@ -24,7 +24,7 @@
 	<section>
 		<form method="get" action="roundtable.php" target="table">
 			<fieldset>
-				<legend><b>Filter Rounds By One Or More Conditions</b></legend>
+				<legend style="font-size: 16pt;"><b>Filter Rounds</b></legend>
 				By Player : <select name="name">
 					<option value="">Any</option>
 					<?php
@@ -43,8 +43,8 @@
 						$stmt->close();
 					?>
 				</select>
-				<input type="reset" name="Reset Filter" style="color: red;">
 				<input type="submit" name="Apply Filter" style="color: green;">
+				<input type="reset" name="Reset Filter" style="color: red;">
 			</fieldset>
 		</form>
 	</section>
@@ -52,26 +52,27 @@
 	<section>
 		<form>
 			<fieldset method="post" action="addround.php" target="table">
-				<legend><b>Add New Round * Follow Steps And Paths *</b> </legend>
+				<legend style="font-size: 16pt;"><b>Add New Round * Follow Steps And Paths *</b> </legend>
 				<fieldset>
 					<legend><b>Step 1: Pick A Player</b></legend>
 					<p>
 					Pick A Player To Add A Round For: <select name="playerid">
-					<?php
-						if(!($stmt = $conn->prepare("SELECT p.id, CONCAT(p.fname,' ',p.lname) as name FROM players p"))){
-							echo "Prepare failed: "  . $conn->errno . " " . $conn->error;
-						}
-						if(!$stmt->execute()){
-							echo "Execute failed: "  . $stmt->connect_errno . " " . $stmt->connect_error;
-						}
-						if(!$stmt->bind_result($id, $name)){
-							echo "Bind failed: "  . $stmt->connect_errno . " " . $stmt->connect_error;
-						}
-						while($stmt->fetch()){
-							echo '<option value="' . $id . '"> ' . $name  . ' </option>\n';
-						}
-						$stmt->close();
-					?>	
+						<option value="">Choose</option>
+						<?php
+							if(!($stmt = $conn->prepare("SELECT p.id, CONCAT(p.fname,' ',p.lname) as name FROM players p ORDER BY p.lname"))){
+								echo "Prepare failed: "  . $conn->errno . " " . $conn->error;
+							}
+							if(!$stmt->execute()){
+								echo "Execute failed: "  . $stmt->connect_errno . " " . $stmt->connect_error;
+							}
+							if(!$stmt->bind_result($id, $name)){
+								echo "Bind failed: "  . $stmt->connect_errno . " " . $stmt->connect_error;
+							}
+							while($stmt->fetch()){
+								echo '<option value="' . $id . '"> ' . $name  . ' </option>\n';
+							}
+							$stmt->close();
+						?>	
 					</select>
 					</p>
 				</fieldset>
@@ -121,6 +122,8 @@
 					</select><br>
 					</p>
 				</fieldset>
+				<input type="submit" name="Apply Filter" style="color: green;">
+				<input type="reset" name="Reset Filter" style="color: red;">
 			</fieldset>
 		</form>
 	</section>

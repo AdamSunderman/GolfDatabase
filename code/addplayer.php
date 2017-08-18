@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-
+	#- New player vars
 	$fname=NULL;
 	$lname=NULL;
 	$age=NULL;
@@ -21,7 +21,7 @@
 	$handicap=NULL;
 	$age=NULL;
 	$ispro=NULL;
-
+	#- Get all new player values and clean up any extra whitespace.
 	if(isset($_POST['addfname']) && $_POST['addfname'] != ""){
 		$fname=trim($_POST['addfname']);
 	}
@@ -49,7 +49,7 @@
 	if(isset($_POST['addispro']) && $_POST['addispro'] != ""){
 		$ispro=$_POST['addispro'];
 	}
-
+	#- Create the new player
 	if(!$conn){
 		echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}	
@@ -68,7 +68,6 @@
 	$stmt->close();
 	$_POST=array();
 ?>
-
 </body>
 </html>
 

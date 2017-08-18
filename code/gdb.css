@@ -68,3 +68,7 @@ a.button{
 	text-decoration: none;
 	color: initial;
 }
+
+#holetable tr td{
+	text-align: center;
+}

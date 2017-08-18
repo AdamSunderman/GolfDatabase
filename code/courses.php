@@ -49,12 +49,12 @@
 			<input type="submit" value="Filter" style="color: green;">
 		</fieldset>
 	</form>
-	<form>
+	<form style="visibility: hidden;">
 		<fieldset style="border: solid black 1px;"> <!-- Change this section -->
 			<legend style="font-size: 16pt;">
 				<b>View Detailed Course Information</b>
 			</legend>
-			<input type="submit" value="See Course" style="color: green;">
+			<input type="submit" value="UNDER CONSTRUCTION" style="color: green;">
 		</fieldset>
 	</form>
 	<br>
@@ -269,8 +269,8 @@
 							Notes: <input type="text" name="hole18notes" maxlength="255">
 				</section>
 			</fieldset><br>
-			<input type="reset" name="reset" value="Reset Form" style="float: right; color: red;">
-			<input type="submit" name="submit" value="Add Course" style="float: right; color: green;">	
+			<input type="submit" name="submit" value="Add Course" style="color: green;">
+			<input type="reset" name="reset" value="Reset Form" style="color: red;">	
 		</fieldset>
 			</form>
 </body>

@@ -11,7 +11,9 @@
 </head>
 <body>
 <?php
+	#- Hole numbers ref.
 	$nums=array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18);
+	#- New Course vars.
 	$newcourseid=null;
 	$newcourselocationid=null;
 	$h1=null;
@@ -32,6 +34,8 @@
 	$h16=null;
 	$h17=null;
 	$h18=null;
+	#- If locationid is not sent in request then the new course location 
+	#- must be created, as well as the new course.
 	if(!($_POST['locationid'])){
 		if(!$conn){
 			echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
@@ -67,7 +71,9 @@
 			$newcourseid=$stmt->insert_id;
 		}
 		$stmt->close();
-	}else{
+	}
+	#- Or else just add the new course to an existing location.
+	else{
 		if(!$conn){
 			echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 		}	
@@ -86,6 +92,7 @@
 		}
 		$stmt->close();
 	}
+	#- If the new course was created then add all the holes for the course (18 holes).
 	if($newcourseid){
 		if(!$conn){
 			echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
@@ -274,7 +281,7 @@
 			$h18=$stmt->insert_id;
 		}
 		$stmt->close();
-
+		#- If all the hole inserts were succesful, set the hole reference ids in the new course
 		if($h1 && $h2 && $h3 && $h4 && $h5 && $h6 && $h7 && $h8 && $h9 && $h10 && $h11 && $h12 && $h13 && $h14 && $h15 && $h16 && $h17 && $h18){
 			if(!$conn){
 				echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
@@ -294,6 +301,7 @@
 			$stmt->close();
 		}
 	}
+	$_POST=array();
 ?>
 </body>
 </html>
